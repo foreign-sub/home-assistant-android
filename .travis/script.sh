@@ -2,11 +2,11 @@
 
 set -ev
 
-git log --format=%B -n 1 $TRAVIS_COMMIT > CHANGES.md
+git log --format=%B -n 1 "$TRAVIS_COMMIT" > CHANGES.md
 mkdir -p app/src/main/play/release-notes/en-US/
 cp CHANGES.md app/src/main/play/release-notes/en-US/default.txt
 
-export VERSION_CODE=`git rev-list --count HEAD`
+export VERSION_CODE="$(git rev-list --count HEAD)"
 
 ./gradlew test
 ./gradlew lint
