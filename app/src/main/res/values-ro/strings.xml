@@ -3,7 +3,7 @@
   <string name="app_name">Home Assistant</string>
   <string name="scanning_network">Se caută o instanță a Home Assistant-ul in rețeaua locală</string>
   <string name="home_assistant_not_discover">Nu am găsit instanța Home Assistant-ului</string>
-  <string name="connect_to_home_internet">Asigurați-vă că telefonul dvs. este conectat 
+  <string name="connect_to_home_internet">Asigurați-vă că telefonul dvs. este conectat
  la rețeaua locală.</string>
   <string name="scan_again">scanează încă o dată</string>
   <string name="manual_setup">introduceți manual adresa</string>

@@ -3,7 +3,7 @@
   <string name="app_name">Home Assistant</string>
   <string name="scanning_network">Prohledávání sítě pro Home Assistant</string>
   <string name="home_assistant_not_discover">Nelze najít  Home Assistant</string>
-  <string name="connect_to_home_internet">Make sure your phone is connected 
+  <string name="connect_to_home_internet">Make sure your phone is connected
 to your home internet.</string>
   <string name="scan_again">znovu prohledat</string>
   <string name="manual_setup">zadat adresu ručně</string>
@@ -15,7 +15,7 @@ to your home internet.</string>
   <string name="retry">Opakovat</string>
   <string name="attempting_registration">Registrace aplikace...</string>
   <string name="unable_to_register">Nelze zaregistrovat aplikaci</string>
-  <string name="error_with_registration">Ověřte, zda máte mobile_app 
+  <string name="error_with_registration">Ověřte, zda máte mobile_app
 integraci povolenou v Home Assistant.</string>
   <string name="url_parse_error">Nelze analyzovat adresu URL vašeho Home Assistant. Měla by vypadat jako https://example.com</string>
   <string name="pref_location_zone_title">Sledování na základě zóny</string>

@@ -3,9 +3,9 @@
   <string name="app_name">Home Assistant</string>
   <string name="scanning_network">Scanner netværket
 efter Home Assistant</string>
-  <string name="home_assistant_not_discover">Kunne ikke finde din 
+  <string name="home_assistant_not_discover">Kunne ikke finde din
 Home Assistant-instans</string>
-  <string name="connect_to_home_internet">Sørg for, at din telefon er tilsluttet 
+  <string name="connect_to_home_internet">Sørg for, at din telefon er tilsluttet
 dit hjemmeinternet.</string>
   <string name="scan_again">scan igen</string>
   <string name="manual_setup">indtast adresse manuelt</string>

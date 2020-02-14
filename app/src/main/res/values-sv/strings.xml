@@ -2,9 +2,9 @@
 <resources>
   <string name="app_name">Home Assistant</string>
   <string name="scanning_network">Söker efter Home Assistant</string>
-  <string name="home_assistant_not_discover">Det gick inte att hitta din 
+  <string name="home_assistant_not_discover">Det gick inte att hitta din
  Home Assistant instans</string>
-  <string name="connect_to_home_internet">Se till att din telefon är ansluten 
+  <string name="connect_to_home_internet">Se till att din telefon är ansluten
  till ditt hemnätverk.</string>
   <string name="scan_again">sök igen</string>
   <string name="manual_setup">Ange adress manuellt</string>
@@ -16,7 +16,7 @@
   <string name="retry">Försök igen</string>
   <string name="attempting_registration">Registrerar app...</string>
   <string name="unable_to_register">Det gick inte att registrera Appen</string>
-  <string name="error_with_registration">Kontrollera att du har mobilen_app 
+  <string name="error_with_registration">Kontrollera att du har mobilen_app
  integration aktiverad i din Home Assistant instans.</string>
   <string name="url_parse_error">Det gick inte att tolka din Home Assistant URL. Den ska se ut som https://example.com</string>
   <string name="pref_location_zone_title">Zonbaserad spårning</string>
@@ -37,7 +37,7 @@
   <string name="pref_connection_internal">Intern URL</string>
   <string name="url_invalid">Ogiltig URL</string>
   <string name="error_auth_revoked">It appears that your authorization was revoked, please reconnect to Home Assistant.</string>
-  <string name="select_instance">Select the instance you would 
+  <string name="select_instance">Select the instance you would
 like to connect to:</string>
   <string name="failed_scan">Scanning for Home Assistant failed.</string>
   <string name="widget_image_description">Home Assistant Widget</string>
