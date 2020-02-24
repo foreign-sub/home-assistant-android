@@ -3,9 +3,9 @@
   <string name="app_name">Home Assistant</string>
   <string name="scanning_network">Ricerca Home Assistant in corso.
 Scansione della rete</string>
-  <string name="home_assistant_not_discover">Impossibile trovate 
+  <string name="home_assistant_not_discover">Impossibile trovate
 il tuo Home Assistant</string>
-  <string name="connect_to_home_internet">Assicurati che il telefono sia collegato 
+  <string name="connect_to_home_internet">Assicurati che il telefono sia collegato
 a Internet di casa tua.</string>
   <string name="scan_again">Cerca di nuovo</string>
   <string name="manual_setup">inserisci l\'indirizzo manualmente</string>
@@ -17,7 +17,7 @@ a Internet di casa tua.</string>
   <string name="retry">Riprova</string>
   <string name="attempting_registration">Registrazione dell\'applicazione in corso...</string>
   <string name="unable_to_register">Impossibile registrare l\'applicazione</string>
-  <string name="error_with_registration">Verifica di avere l\'integrazione mobile_app abilitata 
+  <string name="error_with_registration">Verifica di avere l\'integrazione mobile_app abilitata
 sulla tua istanza di Home Assistant.</string>
   <string name="url_parse_error">Impossibile analizzare l\'URL di Home Assistant. Dovrebbe somigliare a https://esempio.com</string>
   <string name="pref_location_zone_title">Tracciamento basato sulla zona</string>

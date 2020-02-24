@@ -3,7 +3,7 @@
   <string name="app_name">Home Assistant</string>
   <string name="scanning_network">Поиск Home Assistant в домашней сети</string>
   <string name="home_assistant_not_discover">Не удалось обнаружить Home Assistant в этой сети</string>
-  <string name="connect_to_home_internet">Убедитесь, что Ваш телефон подключен 
+  <string name="connect_to_home_internet">Убедитесь, что Ваш телефон подключен
 к домашней сети.</string>
   <string name="scan_again">повторить сканирование</string>
   <string name="manual_setup">ввести адрес вручную</string>

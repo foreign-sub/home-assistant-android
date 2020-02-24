@@ -2,7 +2,7 @@
 <resources>
   <string name="app_name">Home Assistant</string>
   <string name="scanning_network">Escaneando la red para Home Assistant</string>
-  <string name="home_assistant_not_discover">Incapaz de encontrar su 
+  <string name="home_assistant_not_discover">Incapaz de encontrar su
 instancia de Home Assistant</string>
   <string name="connect_to_home_internet">Asegúrese de que su teléfono está conectado al internet de su hogar.</string>
   <string name="scan_again">escanear de nuevo</string>
