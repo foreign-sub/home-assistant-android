@@ -157,7 +157,7 @@ dependencies {
     "fullImplementation"("com.google.firebase:firebase-core:19.0.0")
     "fullImplementation"("com.google.firebase:firebase-iid:21.1.0")
     "fullImplementation"("com.google.firebase:firebase-messaging:22.0.0")
-    "fullImplementation"("io.sentry:sentry-android:4.3.0")
+    "fullImplementation"("io.sentry:sentry-android:5.0.1")
     "fullImplementation"("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.3")
 
     implementation("androidx.work:work-runtime-ktx:2.5.0")
