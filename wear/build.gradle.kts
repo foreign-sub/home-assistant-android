@@ -104,7 +104,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.45")
     kapt("com.google.dagger:hilt-android-compiler:2.45")
 
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.5")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2")
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
 
     implementation("com.mikepenz:iconics-core:5.4.0")
