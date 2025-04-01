@@ -1,134 +1,83 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("com.github.triplet.play")
-    kotlin("kapt")
-    id("dagger.hilt.android.plugin")
-    id("com.google.gms.google-services")
+    alias(libs.plugins.homeassistant.android.application)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.screenshot)
 }
 
 android {
-    namespace = "io.homeassistant.companion.android"
-
-    compileSdk = 33
-
     defaultConfig {
-        applicationId = "io.homeassistant.companion.android"
-        minSdk = 26
-        targetSdk = 32
+        minSdk = libs.versions.androidSdk.wear.min.get().toInt()
+        targetSdk = libs.versions.androidSdk.wear.target.get().toInt()
 
-        versionName = System.getenv("VERSION") ?: "LOCAL"
+        versionName = project.version.toString()
         // We add 1 because the app and wear versions need to have different version codes.
-        versionCode = (System.getenv("VERSION_CODE")?.toIntOrNull() ?: 1) + 1
+        versionCode = 1 + checkNotNull(versionCode) { "Did you forget to apply the convention plugin that set the version code?" }
+    }
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments(mapOf("room.incremental" to "true"))
-            }
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
+
+    testOptions {
+        screenshotTests {
+            imageDifferenceThreshold = 0.00025f // 0.025%
         }
     }
-
-    buildFeatures {
-        viewBinding = true
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.2"
-    }
-
-    compileOptions {
-        sourceCompatibility(JavaVersion.VERSION_11)
-        targetCompatibility(JavaVersion.VERSION_11)
-    }
-
-    signingConfigs {
-        create("release") {
-            storeFile = file(System.getenv("KEYSTORE_PATH") ?: "release_keystore.keystore")
-            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
-            keyAlias = System.getenv("KEYSTORE_ALIAS") ?: ""
-            keyPassword = System.getenv("KEYSTORE_ALIAS_PASSWORD") ?: ""
-            enableV1Signing = true
-            enableV2Signing = true
-        }
-    }
-
-    buildTypes {
-        named("debug").configure {
-            applicationIdSuffix = ".debug"
-        }
-        named("release").configure {
-            isDebuggable = false
-            isJniDebuggable = false
-            signingConfig = signingConfigs.getByName("release")
-        }
-    }
-
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-
-    lint {
-        disable += "MissingTranslation"
-    }
-
-    kapt {
-        correctErrorTypes = true
-    }
-}
-
-play {
-    serviceAccountCredentials.set(file("playStorePublishServiceCredentialsFile.json"))
-    track.set("internal")
-    resolutionStrategy.set(com.github.triplet.gradle.androidpublisher.ResolutionStrategy.IGNORE)
-    commit.set(false)
 }
 
 dependencies {
     implementation(project(":common"))
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.10")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
+    coreLibraryDesugaring(libs.tools.desugar.jdk)
 
-    implementation("com.google.android.material:material:1.8.0")
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.guava)
+    implementation(libs.kotlinx.coroutines.play.services)
 
-    implementation("androidx.wear:wear:1.2.0")
-    implementation("com.google.android.gms:play-services-wearable:18.0.0")
-    implementation("androidx.wear:wear-input:1.2.0-alpha02")
-    implementation("androidx.wear:wear-remote-interactions:1.0.0")
-    implementation("androidx.wear:wear-phone-interactions:1.0.1")
+    implementation(libs.material)
 
-    implementation("com.google.dagger:hilt-android:2.45")
-    kapt("com.google.dagger:hilt-android-compiler:2.45")
+    implementation(libs.wear)
+    implementation(libs.core.ktx)
+    implementation(libs.core.splashscreen)
+    implementation(libs.play.services.wearable)
+    implementation(libs.wear.input)
+    implementation(libs.wear.remote.interactions)
+    implementation(libs.wear.phone.interactions)
 
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.5")
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
 
-    implementation("com.mikepenz:iconics-core:5.4.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.mikepenz:community-material-typeface:7.0.96.0-kotlin@aar")
-    implementation("com.mikepenz:iconics-compose:5.4.0")
+    implementation(libs.jackson.module.kotlin)
+    implementation(libs.okhttp)
 
-    implementation("androidx.activity:activity-ktx:1.6.1")
-    implementation("androidx.activity:activity-compose:1.6.1")
-    implementation("androidx.compose.compiler:compiler:1.4.2")
-    implementation(platform("androidx.compose:compose-bom:2023.01.00"))
-    implementation("androidx.compose.foundation:foundation")
-    implementation("androidx.compose.ui:ui-tooling")
-    implementation("androidx.wear.compose:compose-foundation:1.1.2")
-    implementation("androidx.wear.compose:compose-material:1.1.2")
-    implementation("androidx.wear.compose:compose-navigation:1.1.2")
+    implementation(libs.iconics.core)
+    implementation(libs.appcompat)
+    implementation(libs.community.material.typeface)
+    implementation(libs.iconics.compose)
 
-    implementation("com.google.guava:guava:31.1-android")
-    implementation("androidx.wear.tiles:tiles:1.1.0")
+    implementation(libs.activity.ktx)
+    implementation(libs.activity.compose)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material.icons.core)
+    implementation(libs.compose.material.icons.extended)
+    implementation(libs.compose.uiTooling)
+    implementation(libs.wear.compose.foundation)
+    implementation(libs.wear.compose.material)
+    implementation(libs.wear.compose.navigation)
+    implementation(libs.wear.tooling)
 
-    implementation("androidx.wear.watchface:watchface-complications-data-source-ktx:1.1.1")
+    implementation(libs.guava)
+    implementation(libs.bundles.wear.tiles)
 
-    implementation("androidx.health:health-services-client:1.0.0-beta02")
+    implementation(libs.androidx.watchface.complications.data.source.ktx)
 
-    implementation(platform("com.google.firebase:firebase-bom:31.2.2"))
-    implementation("com.google.firebase:firebase-messaging")
+    implementation(libs.androidx.health.services.client)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging)
+    screenshotTestImplementation(libs.compose.uiTooling)
+
+    androidTestImplementation(platform(libs.compose.bom))
+    androidTestImplementation(libs.bundles.androidx.test)
+    androidTestImplementation(libs.bundles.androidx.compose.ui.test)
 }

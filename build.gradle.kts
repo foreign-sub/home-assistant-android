@@ -1,39 +1,32 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
-    id("org.jlleitschuh.gradle.ktlint") version "11.1.0"
-    id("com.github.ben-manes.versions") version "0.46.0"
-}
+    alias(libs.plugins.ktlint)
 
-buildscript {
-    repositories {
-        google()
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath("com.android.tools.build:gradle:7.4.1")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10")
-        classpath("com.google.gms:google-services:4.3.15")
-        classpath("com.google.firebase:firebase-appdistribution-gradle:3.2.0")
-        classpath("de.mannodermaus.gradle.plugins:android-junit5:1.8.2.1")
-        classpath("com.github.triplet.gradle:play-publisher:3.8.1")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.45")
-    }
+    alias(libs.plugins.android.application).apply(false)
+    alias(libs.plugins.android.library).apply(false)
+    alias(libs.plugins.kotlin.android).apply(false)
+    alias(libs.plugins.google.services).apply(false)
+    alias(libs.plugins.firebase.appdistribution).apply(false)
+    alias(libs.plugins.hilt).apply(false)
+    alias(libs.plugins.kotlin.parcelize).apply(false)
+    alias(libs.plugins.ksp).apply(false)
+    alias(libs.plugins.compose.compiler).apply(false)
 }
 
 allprojects {
-    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+    apply(plugin = rootProject.libs.plugins.ktlint.get().pluginId)
 
-    tasks.withType<KotlinCompile>().configureEach {
-        kotlinOptions {
-            jvmTarget = "11"
+    ktlint {
+        android.set(true)
+        reporters {
+            reporter(ReporterType.SARIF)
+            reporter(ReporterType.PLAIN)
         }
     }
-}
 
-gradle.projectsEvaluated {
-    project(":app").tasks.matching { it.name.startsWith("publish") }.configureEach {
-        mustRunAfter(project(":wear").tasks.matching { it.name.startsWith("publish") })
+    dependencyLocking {
+        lockAllConfigurations()
     }
 }
 
@@ -41,6 +34,17 @@ tasks.register("clean").configure {
     delete("build")
 }
 
-ktlint {
-    android.set(true)
+tasks.register("alldependencies").configure {
+    setDependsOn(
+        project.allprojects.flatMap {
+            it.tasks.withType<DependencyReportTask>()
+        }
+    )
+}
+
+tasks.register("versionFile").configure {
+    group = "publishing"
+    doLast {
+        File(projectDir, "version.txt").writeText(project.version.toString())
+    }
 }

@@ -1,20 +1,20 @@
-name: 'Inflate Secrets'
-description: 'Inflates the secret values into the appropriate files'
+name: "Inflate Secrets"
+description: "Inflates the secret values into the appropriate files"
 inputs:
   keystore:
-    description: 'The keystore to inflate'
+    description: "The keystore to inflate"
     required: true
   google-services:
-    description: 'The google-services.json to inflate'
+    description: "The google-services.json to inflate"
     required: true
   firebase-creds:
-    description: 'The firebase credentials to inflate'
+    description: "The firebase credentials to inflate"
     required: true
   playstore-creds:
-    description: 'The playstore credentials to inflate'
+    description: "The playstore credentials to inflate"
     required: true
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: Mock debug google-services.json
       shell: bash
@@ -26,9 +26,10 @@ runs:
       shell: bash
       env:
         KEYSTORE: ${{ inputs.keystore }}
-      run: | 
+      run: |
         echo $KEYSTORE | base64 --decode > app/release_keystore.keystore
         echo $KEYSTORE | base64 --decode > wear/release_keystore.keystore
+        echo $KEYSTORE | base64 --decode > automotive/release_keystore.keystore
 
     - name: Inflate google-services.json
       shell: bash
@@ -37,6 +38,7 @@ runs:
       run: |
         echo $GOOGLE_SERVICES > app/google-services.json
         echo $GOOGLE_SERVICES > wear/google-services.json
+        echo $GOOGLE_SERVICES > automotive/google-services.json
 
     - name: Inflate firebaseAppDistributionServiceCredentialsFile.json
       shell: bash
@@ -52,3 +54,4 @@ runs:
       run: |
         echo $CREDS > app/playStorePublishServiceCredentialsFile.json
         echo $CREDS > wear/playStorePublishServiceCredentialsFile.json
+        echo $CREDS > automotive/playStorePublishServiceCredentialsFile.json
